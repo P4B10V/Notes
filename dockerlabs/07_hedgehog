@@ -1,5 +1,8 @@
 
 tac -> darle la vuelta a rockyou.txt 
+sed -i 's/ //g' invertido.txt
+
+
 
 tails@aea2bd9f04fc:~$ sudo -l
 User tails may run the following commands on aea2bd9f04fc:
