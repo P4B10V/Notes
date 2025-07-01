@@ -1,0 +1,12 @@
+
+usar exiftool con la imagen 
+
+recibimos usuario
+
+la utilizamos con hydra en ssh 
+
+miramos sudo su -l y vemos que podemos usar /bin/bash como sudo 
+
+sudo -u root /bin/bash -> tambien funciono sudo /bin/bash
+
+y ya somos root
