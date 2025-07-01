@@ -1,0 +1,10 @@
+ gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x .php,.sh,.py,.txt
+
+
+la pagina secret se encuentra mario -> probamos como usuario en hydra -> obtenemos credencial
+
+hacemos sudo -l 
+
+nos permite usar vim como sudo
+
+en vim :!/bin/bash -> escalada de privilegios
