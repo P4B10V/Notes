@@ -1,0 +1,2 @@
+
+metasploit para enumerar usuarios en el ssh, se encontró root y se probo con hydra y funcionó, no fue muy complicado.
