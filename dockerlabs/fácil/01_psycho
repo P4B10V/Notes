@@ -29,12 +29,35 @@ con la imagen no saqué nada en claro por lo que probaré con otra cosa.
 
 #########################
 
-LFI (Local File Inclusion)
+
+Enlaces para estudiar LFI (Local File Inclusion):
 https://edu.anarcho-copy.org/Against%20Security%20-%20Self%20Security/Dafydd%20Stuttard,%20Marcus%20Pinto%20-%20The%20web%20application%20hacker%27s%20handbook_%20finding%20and%20exploiting%20security%20flaws-Wiley%20(2011).pdf
-
-
 https://www.youtube.com/watch?v=64XIkIyCIRo
 https://portswigger.net/web-security/file-path-traversal
+
+
+#########################
+
+
+Después de estudiar sobre LFI gané un poco de conocimiento sobre el asunto. Las paginas web tienen recursos que pueden estar siendo compartidos si se hace una 
+request. Algo del estilo como ?page= dando la posibilidad de introducir parámetros como ../../../../etc/passwd para obtener información sobre el servidor.
+Para obtener esos recursos utilicé 
+  $ ffuf -u http://172.17.0.2/?FUZZ=../../../../../etc/passwd -w /usr/share/seclists/Discovery/Web-Content/big.txt -mc 200 -fs 2596 
+El -fs se saca se haber hecho primero un ffuf sin filtro, y ver que el número 2596 se repetía en todos, por lo que al aplicar el filtro aparecio un recurso llamado secret.
+
+
+http://172.17.0.2/?secret=../../../../etc/ssh/sshd_config
+http://172.17.0.2/?secret=../../../../etc/passwd
+
+
+
+
+
+
+
+
+
+
 
 
 
