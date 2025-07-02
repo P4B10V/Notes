@@ -24,9 +24,13 @@ nada más que hacer ahí, intentaré descubrir directorios.
 /server-status        (Status: 403) [Size: 275]
 
 En el resultado de la primera búsqueda se encontró /assest por lo que vamos a explorarlo. Tenía una imagen la cual se descargó y se probó con herramientas como 
-exiftool y strings. Con strings nos devolvía: - " " -D*2**2*D<I;7;I<lUKKUl}ici} que parecía bastante raro, pero no conseguí nada en claro. 
+exiftool y strings. Con strings nos devolvía: - " " -D*2**2*D<I;7;I<lUKKUl}ici} que parecía bastante raro, pero no conseguí nada en claro. Después de intentarlo 
+con la imagen no saqué nada en claro por lo que probaré con otra cosa.
 
-D22DI7IlUKKUlici
+#########################
+
+
+
 
 
 
