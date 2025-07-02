@@ -1,0 +1,36 @@
+Máquina Psycho. 
+
+## Primero se hará lo de siempre, desplegar la máquina y comprobar que tenemos conexión con ella ##
+
+Para el primer reconocimiento haremos un: 
+  $ nmap -sS -p- -Pn -n 172.17.0.2 -oN fScan
+
+Obtenemos dos puertos, el 22 y el 80:
+  $ nmap -sT -sV 172.17.0.2 -oN pScan
+
+22/tcp open  ssh     OpenSSH 9.6p1 Ubuntu 3ubuntu13.4 (Ubuntu Linux; protocol 2.0)
+80/tcp open  http    Apache httpd 2.4.58 ((Ubuntu))
+
+Lo primero que hice fue visitar la página web. Los botones no te llevaban a ningún sitio, ni había nada mas que pudiera servirme. Lo único raro que encontré 
+fue en el source code de la página, al final del HTML me encontré con lo siguiente:  " [!] ERROR [!] " , no sé que podrá significar o hacer. Como no se me ocurre 
+nada más que hacer ahí, intentaré descubrir directorios.
+
+  $ gobuster dir -u http://172.17.0.2 -w /usr/share/wordlists/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x .php,.sh,.py,.txt
+
+/index.php            (Status: 200) [Size: 2596]
+/.php                 (Status: 403) [Size: 275]
+/assets               (Status: 301) [Size: 309] [--> http://172.17.0.2/assets/]
+/.php                 (Status: 403) [Size: 275]
+/server-status        (Status: 403) [Size: 275]
+
+En el resultado de la primera búsqueda se encontró /assest por lo que vamos a explorarlo. Tenía una imagen la cual se descargó y se probó con herramientas como 
+exiftool y strings. Con strings nos devolvía: - " " -D*2**2*D<I;7;I<lUKKUl}ici} que parecía bastante raro, pero no conseguí nada en claro. 
+
+D22DI7IlUKKUlici
+
+
+
+
+
+
+
