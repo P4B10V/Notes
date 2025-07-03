@@ -76,7 +76,8 @@ os.system("bash")
 
 Y al ejecutarlo: sudo /usr/bin/python3 /opt/paw.py -> nos convertimos en root
 
-
+O tambien crear un archivo subprocess.py con el contenido import os; os.system("bash") y al ejecutar paw.py como importa el módulo subprocess iria a nuestro
+archivo creado en ese directorio con el código para convertirnos en root.
 
 
 
