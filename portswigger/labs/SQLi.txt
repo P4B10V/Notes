@@ -1,0 +1,21 @@
+
+Se puede hacer:
+  >> Con una comilla " ' "  para buscar errores.
+  >> Condiciones booleanas como 1=1 o 1=2 
+
+La mayoria de las vulnerabilidades ocurren dentro de la claúsula WHERE de un SELECT 
+  Pueden ocurrir:
+    En UPDATE dentro de los valores actualizados o en la clausula WHERE.
+    En INSERT dentro de los valores insertados.
+    En SELECT dentro de la tabla o el nombre de la columna.
+    En SELECT dentro de una claúsula ORDER BY.
+
+*SE PUEDE HACER SQLi DESDE UN NAVEGADOR*
+
+1º LABORATORIO >> SQL injection vulnerability in WHERE clause allowing retrieval of hidden data
+  
+https://0a7d007e04e4a8b680fabc1e004e00e4.web-security-academy.net/filter?category=Gifts'+OR+1=1--
+
+2º LABORATORIO >> SQL injection vulnerability allowing login bypass
+
+administrator'-- 
