@@ -18,3 +18,6 @@ que nos pueda servir, si existe una mal configuración en el manejo de errores.
 Scan >> Generar reportes >> 
 Burp tiene una función de escaneo y deteccion de errores (se necesita el PRO)
 
+
+me quede aqui>
+https://portswigger.net/burp/documentation/desktop/testing-workflow/mapping/visible-attack-surface
