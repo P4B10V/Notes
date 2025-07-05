@@ -1,0 +1,20 @@
+Apuntes Burp
+
+Burp proxy >> 
+Nos permite interceptar paquetes http para ver su contenido. Nos da la opción de abrir un navegador y si el modo intercept está on, por ejemplo, si queremos visitar una 
+página, el navegador de burp se quedará quieto pues el paquete GET para pedir la página web es interceptado, es decir, que aún no se envió. Mientras el paquete "está cautivo"
+podremos ver su contenido e incluso modificarlo, para despues con la función de forward enviarlo. 
+
+Modificar HTTP requests >> 
+https://portswigger.net/burp/documentation/desktop/getting-started/modifying-http-requests
+En este laboratorio de PortSwigger se aprende a, en una web falsa que tiene una tienda online, interceptar un paquete de POST para hacer una compra y modificar el precio y 
+reenviarlo. 
+
+Set the target scope >>
+Burp nos permite filtrar el HTTP history para visualizar sólo los paquetes de la URL interesada. En el laboratorio de este capítulo se intercepta un paquete para 
+ver los detalles de un producto, poner product=1 y enviar un string para intentar provocar un error y así conseguir la versión del servidor o cualquier información 
+que nos pueda servir, si existe una mal configuración en el manejo de errores.
+
+Scan >> Generar reportes >> 
+Burp tiene una función de escaneo y deteccion de errores (se necesita el PRO)
+
