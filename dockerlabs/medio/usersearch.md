@@ -12,6 +12,3 @@ PORT   STATE SERVICE
 22/tcp open  ssh
 80/tcp open  http
 MAC Address: 02:42:AC:13:00:02 (Unknown)
-
-
-
