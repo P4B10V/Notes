@@ -24,7 +24,13 @@ Se podría realizar otro escaneo con nmap pero voy a investigar el puerto 80 par
 ```bash
 whatweb http://172.18.0.2                                
 ```
+Ya tenemos la versión del servicio que está corriendo en el puerto 80, que es Apache 2.4.59
 
+```bash
 #### http://172.18.0.2 [200 OK] Apache[2.4.59], Country[RESERVED][ZZ], HTML5, HTTPServer[Debian Linux][Apache/2.4.59 (Debian)], IP[172.18.0.2], Title[User Search]
-   
+```
 
+Antes de buscar vulnerabilidades sobre Apache, voy a visitar la página web. 
+
+
+![Captura](https://github.com/user-attachments/assets/57a2037f-d52b-41c1-892f-615f29d5f3fc)
