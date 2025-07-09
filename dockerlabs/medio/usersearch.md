@@ -44,6 +44,7 @@ de Burp enviando ?user= con valores como ../../../etc/passwd o ....//....//..../
 al input de la página principal. 
 
 Probando nombres aleatorios las respuestas cambian entre "Unauthorized query" o "No results found" aunque probando con "admin" se obtuvo una respuesta:
+
 ![admin](https://github.com/user-attachments/assets/445aa63c-6650-4232-82b1-d70d81880513)
 
 Por la información que dan pienso que la query será algo como:
@@ -51,6 +52,7 @@ SELECT username, password FROM tabla_usuarios WHERE username=admin
 
 Probando distintos inputs SQLi obtuve una respuesta con:
 admin' OR 1=1-- - 
+
 ![admin](https://github.com/user-attachments/assets/b10326e3-ee1e-47aa-8f3f-566379590b03)
 
 Como ahora tenemos usuarios y contraseñas, se probará a realizar una conexión por ssh, pues tiene el puerto open. (administrador y user1 no funcionan)
