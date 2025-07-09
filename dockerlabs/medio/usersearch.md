@@ -25,6 +25,6 @@ Se podría realizar otro escaneo con nmap pero voy a investigar el puerto 80 par
 whatweb http://172.18.0.2                                
 ```
 
-####http://172.18.0.2 [200 OK] Apache[2.4.59], Country[RESERVED][ZZ], HTML5, HTTPServer[Debian Linux][Apache/2.4.59 (Debian)], IP[172.18.0.2], Title[User Search]
+#### http://172.18.0.2 [200 OK] Apache[2.4.59], Country[RESERVED][ZZ], HTML5, HTTPServer[Debian Linux][Apache/2.4.59 (Debian)], IP[172.18.0.2], Title[User Search]
    
 
