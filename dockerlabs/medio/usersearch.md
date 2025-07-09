@@ -53,7 +53,7 @@ SELECT username, password FROM tabla_usuarios WHERE username=admin
 Probando distintos inputs SQLi obtuve una respuesta con:
 admin' OR 1=1-- - 
 
-![admin](https://github.com/user-attachments/assets/b10326e3-ee1e-47aa-8f3f-566379590b03)
+![usuarios](https://github.com/user-attachments/assets/19785ba7-7747-4f40-ba91-56754db5d1cc)
 
 Como ahora tenemos usuarios y contraseñas, se probará a realizar una conexión por ssh, pues tiene el puerto open. (administrador y user1 no funcionan)
 
@@ -81,6 +81,7 @@ Probaremos a borrar el archivo a ver si podemos (al ser nuestra carpeta personal
 por lo que crearemos otro archivo .py con el mismo nombre para intentar escalar privilegios con Python. 
 
 ![escalada](https://github.com/user-attachments/assets/0c40a8f9-cfaf-4972-9777-b8a79b62fa7f)
+
 
 
 
