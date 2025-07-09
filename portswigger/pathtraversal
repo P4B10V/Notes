@@ -15,5 +15,5 @@ En url que visitamos podríamos ver algo como ?filename= o ?file= e intentar int
 /var/www/images/../../../etc/passwd
 ../../../etc/passwd%00.png >> Utilización de un null byte
 
-Si la web fuera vulnerable a directory traversal, podríamos consultar datos internos del servidor. Si fueramos capaces de visualizar /etc/passwd ya estaríamos
-ganando un vector de entrada pues podríamos listar todos los usuarios que tiene el sistema para por ejemplo probar con un ataque de fuerza bruta.
+Si la web fuera vulnerable a directory traversal, podríamos consultar datos internos del servidor. Si fueramos capaces de visualizar /etc/passwd podríamos listar
+todos los usuarios que tiene el sistema para por ejemplo probar con un ataque de fuerza bruta.
